@@ -49,7 +49,9 @@ class FirestoreDocumentSnapshot extends ArrayObject
 
     public static function fromDocumentSnapshot(string $connection, DocumentSnapshot $documentSnapshot)
     {
-        $undoted = [];
+        $undoted = [
+            "id" => $documentSnapshot->id(),
+        ];
         foreach (Arr::dot($documentSnapshot->data()) as $key => $value) {
             if ($value instanceof DocumentReference) {
                 $value = $value->path();
